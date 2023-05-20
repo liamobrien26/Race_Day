@@ -66,7 +66,7 @@ internal class Program
         int currentLapRecordTime = int.MaxValue;
 
         // Loop for each lap
-        for (int lap = 1; lap <= 1; lap++) //MAKE SURE TO UPDATE LAP TIME
+        for (int lap = 1; lap <= 12; lap++) //Set number of laps
         {
             // Collect lap times for each driver
             foreach (Driver driver in drivers)
