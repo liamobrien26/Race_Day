@@ -39,9 +39,7 @@ namespace race_day
             BestLapTime = 0;
         }
     }
-
-
-
+    
     public class RaceInformation
     {
         public List <double> DistanceCovered { get; set; }
@@ -58,13 +56,6 @@ namespace race_day
             PetrolCost = new List<double>() { 3.50 }; //Cost per lap
             CurrentLapRecordUser = "";
         }
-
-        /*public void SetCurrentLapRecordUser(string driverName)
-        {
-            CurrentLapRecordUser = driverName;
-        }*/
-
-
     }
 
 
