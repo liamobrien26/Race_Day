@@ -30,27 +30,29 @@ internal class Program
         return DriverName.ToUpper();
     }
 
-    static int RaceRegAge(string DriverName)
+    static int RaceRegAge(string DriverName, List<Users> users)
     {
+        
         Console.Clear();
         Console.WriteLine("Input driver's age: ");
         int DriverAge = Convert.ToInt32(Console.ReadLine());
-        Users.RecordData(DriverName, DriverAge);
+        users.Add(new Users(DriverName, DriverAge));
         return DriverAge;
     }
 
-    static void LapTimeCollecter()
+
+    static void LapTimeCollecter(List<Users> users)
     {
         // Creates a new list to store drivers
         List<Driver> drivers = new List<Driver>();
 
         //Gets all users from _Names
-        foreach (KeyValuePair<string, int> driverData in Users._Names)
+        foreach (Users user in users)
         {
             //Set name from _Names to driverName variable
-            string DriverName = driverData.Key;
+            string DriverName = user.Name;
             //Set age from _Name to driverAge variable
-            int DriverAge = driverData.Value;
+            int DriverAge = user.Age;
 
             // Creates a new Driver object
             Driver driver = new Driver(DriverName, DriverAge);
@@ -66,7 +68,7 @@ internal class Program
         int currentLapRecordTime = int.MaxValue;
 
         // Loop for each lap
-        for (int lap = 1; lap <= 12; lap++) //Set number of laps
+        for (int lap = 1; lap <= 1; lap++) 
         {
             // Collect lap times for each driver
             foreach (Driver driver in drivers)
@@ -243,8 +245,8 @@ internal class Program
         int lapTotal = 0;
         double costPerLap = 0;
         int totalNumberOfPeople = drivers.Count;
-        double costPerPerson = 100;  // Assuming the cost per person is $100
-        double estimatedCostOfPetrolPerLap = 50;  // Assuming the estimated cost of petrol per lap is $50
+        double costPerPerson = 100;  // Assuming the cost per person is £100
+        double estimatedCostOfPetrolPerLap = 50;  // Assuming the estimated cost of petrol per lap is £50
 
         foreach (Driver driver in drivers)
         {
@@ -292,6 +294,7 @@ internal class Program
     static void Program1()
     {
         List<Driver> drivers = new List<Driver>();// List to store drivers participating in the race
+        List<Users> users = new List<Users>();
 
         while (true)
         {
@@ -301,19 +304,23 @@ internal class Program
             {
                 case 1: //Entry for race
                     string DriverName = RaceRegName();// Get driver's name
-                   int DriverAge = RaceRegAge(DriverName); // Get driver's age
+                    int DriverAge = RaceRegAge(DriverName,users); // Get driver's age
 
                     Driver driver = new Driver(DriverName, DriverAge); // Create a new Driver instance
                     drivers.Add(driver); // Add the driver to the list of drivers
+                    Console.Clear();
+                    Console.WriteLine(DriverName + " has been successfully registered for the upcoming race");
+                    Console.WriteLine("\n\nPress enter to acknowledge...");
+                    Console.ReadKey();
                     break;
 
                 case 2: //Start Race
                     Console.Clear();
                     Console.WriteLine("----- Drivers for the British Grand Prix -----\n");
-                    Users.DisplayAllUser(); // Display all registered users
+                    Users.DisplayAllUsers(users); // Display all registered users
                     Console.WriteLine("\nPress enter to START race...");
                     Console.ReadKey();
-                    LapTimeCollecter();// Collect lap times for each driver
+                    LapTimeCollecter(users);// Collect lap times for each driver
                     break;
 
                 case 3:
