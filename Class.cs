@@ -3,23 +3,28 @@ namespace race_day
 {
     public class Users
     {
-       public static Dictionary<string, int> _Names = new Dictionary<string, int>
-        {
-             {"LIAM O'BRIEN", 25},
-             {"LEWIS HAMILTON", 38},
-        };
+        public string Name { get; set; }
+        public int Age { get; set; }
 
-        public static void RecordData(string DriverName,int DriverAge)
+        public Users(string name, int age)
         {
-            _Names.Add(DriverName, DriverAge);
+            Name = name;
+            Age = age;
         }
 
-        public static void DisplayAllUser()
+        public static void DisplayAllUsers(List<Users> users)
         {
-            foreach (KeyValuePair<string, Int32> value in _Names)
+
+            // Add users to the list
+            users.Add(new Users("LIAM O'BRIEN", 25));
+            
+
+            // Display user information
+            foreach (Users user in users)
             {
-             Console.WriteLine("Driver: " + value.Key);
-        Console.WriteLine("Age: " + value.Value);
+                Console.WriteLine("Name: " + user.Name);
+                Console.WriteLine("Age: " + user.Age);
+                Console.WriteLine();
             }
         }
     }
@@ -39,7 +44,7 @@ namespace race_day
             BestLapTime = 0;
         }
     }
-    
+
     public class RaceInformation
     {
         public List <double> DistanceCovered { get; set; }
@@ -56,6 +61,10 @@ namespace race_day
             PetrolCost = new List<double>() { 3.50 }; //Cost per lap
             CurrentLapRecordUser = "";
         }
+
+        
+
+
     }
 
 
